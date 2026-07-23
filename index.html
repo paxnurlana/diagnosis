@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Проверь свою рекламу — Бексултан</title>
+<title>Проверь свою рекламу</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,13 +30,6 @@
     flex-direction: column;
     gap: 14px;
   }
-  .brand {
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: #15151A;
-    text-align: center;
-  }
   .progress-wrap { display: flex; align-items: center; gap: 10px; }
   .progress-bar {
     flex: 1; height: 5px;
@@ -56,7 +49,7 @@
   }
   .card-wrap {
     width: 100%; max-width: 600px;
-    margin-top: 36px; position: relative; min-height: 480px;
+    margin-top: 36px; position: relative; min-height: 520px;
   }
   .card {
     background: #fff;
@@ -140,16 +133,44 @@
     border: 1.5px solid #E8E8E8; border-radius: 14px;
     font-family: 'Inter', sans-serif; font-size: 15px;
     color: #15151A; background: #FAFAFA;
-    outline: none; transition: border-color 0.2s;
+    outline: none; transition: border-color 0.2s, background 0.2s;
   }
   .form-group input:focus { border-color: #FF5A1F; background: #fff; }
+  .form-group input.error {
+    border-color: #E53935 !important;
+    background: #FFF5F5;
+  }
+  .field-error {
+    font-size: 12.5px;
+    color: #E53935;
+    margin-top: -8px;
+    display: none;
+  }
+  .field-error.show { display: block; }
   .form-group input::placeholder { color: #BCBCBC; }
   .form-privacy {
     font-size: 12.5px; color: #B0B0B0;
     text-align: center; line-height: 1.5; margin-top: 10px;
   }
   .result-header { text-align: center; margin-bottom: 28px; }
-  .result-emoji { font-size: 52px; margin-bottom: 14px; display: block; }
+  .result-done-icon {
+    width: 72px; height: 72px;
+    margin: 0 auto 18px;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px -4px rgba(76,175,80,0.4);
+  }
+  .result-done-icon svg {
+    width: 36px; height: 36px;
+    stroke: #fff;
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
   .result-header h2 { margin-bottom: 10px; }
   .result-header p { font-size: 15px; color: #6B6D76; line-height: 1.55; }
   .result-diagnosis {
@@ -187,20 +208,32 @@
   }
   .av:nth-child(2) { background: linear-gradient(135deg, #42A5F5, #1565C0); }
   .av:nth-child(3) { background: linear-gradient(135deg, #66BB6A, #2E7D32); }
+  .btn-whatsapp {
+    margin-top: 20px; width: 100%; padding: 22px 16px;
+    border-radius: 999px; border: none;
+    background: #25D366; color: #fff;
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    box-shadow: 0 10px 28px -8px rgba(37,211,102,0.5);
+  }
+  .btn-whatsapp:hover { transform: translateY(-2px); }
+  .btn-whatsapp svg { width: 24px; height: 24px; fill: #fff; flex: none; }
   @media (max-width: 480px) {
     .card { padding: 30px 22px 28px; }
     .card h2 { font-size: 19px; }
     .option { padding: 14px 16px; gap: 10px; }
+    .btn-whatsapp { font-size: 16px; padding: 20px 14px; }
   }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div class="brand">Бексултан · Маркетолог</div>
   <div class="progress-wrap">
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="progress-label" id="progressLabel">Шаг 1 / 3</div>
+    <div class="progress-label" id="progressLabel">Шаг 1 / 6</div>
   </div>
 </div>
 
@@ -208,15 +241,15 @@
 
   <!-- ВОПРОС 1 -->
   <div class="card active" id="step-1">
-    <div class="step-eyebrow">Вопрос 1 из 3</div>
+    <div class="step-eyebrow">Вопрос 1 из 6</div>
     <h2>Запускали ли вы рекламу для мебельного бизнеса раньше?</h2>
     <div class="options" data-step="1">
-      <div class="option" data-value="Запускал — результата почти не было">
+      <div class="option" data-value="Запускал, но результата почти не было">
         <div class="opt-icon">😔</div>
         <div class="opt-text">Запускал, но результата почти не было</div>
         <div class="opt-check"></div>
       </div>
-      <div class="option" data-value="Запускал — есть результат, хочу больше">
+      <div class="option" data-value="Запускал, есть результат — хочу больше">
         <div class="opt-icon">📈</div>
         <div class="opt-text">Запускал, есть результат — хочу больше</div>
         <div class="opt-check"></div>
@@ -232,22 +265,32 @@
 
   <!-- ВОПРОС 2 -->
   <div class="card" id="step-2">
-    <div class="step-eyebrow">Вопрос 2 из 3</div>
+    <div class="step-eyebrow">Вопрос 2 из 6</div>
     <h2>Какая главная проблема с рекламой прямо сейчас?</h2>
     <div class="options" data-step="2">
-      <div class="option" data-value="Мало заявок — директ пустой">
+      <div class="option" data-value="Заявок мало, реклама работает плохо">
         <div class="opt-icon">📭</div>
-        <div class="opt-text">Мало заявок — директ пустой</div>
+        <div class="opt-text">Заявок мало, реклама работает плохо</div>
         <div class="opt-check"></div>
       </div>
-      <div class="option" data-value="Заявки есть, но люди не покупают">
-        <div class="opt-icon">🤷</div>
-        <div class="opt-text">Заявки есть, но люди не покупают</div>
+      <div class="option" data-value="Заявки есть, но приходят неплатёжеспособные, проблемные клиенты">
+        <div class="opt-icon" style="background:#FFEBEE; color:#E53935;">😠</div>
+        <div class="opt-text">Заявки есть, но приходят неплатёжеспособные, проблемные клиенты</div>
         <div class="opt-check"></div>
       </div>
-      <div class="option" data-value="Не понимаю, сколько вкладывать в рекламу">
-        <div class="opt-icon">💰</div>
-        <div class="opt-text">Не понимаю, сколько вкладывать в рекламу</div>
+      <div class="option" data-value="Таргетолог есть, но результат плохой">
+        <div class="opt-icon">😕</div>
+        <div class="opt-text">Таргетолог есть, но результат плохой</div>
+        <div class="opt-check"></div>
+      </div>
+      <div class="option" data-value="Продажи нестабильные — то густо, то пусто">
+        <div class="opt-icon">📉</div>
+        <div class="opt-text">Продажи нестабильные — то густо, то пусто</div>
+        <div class="opt-check"></div>
+      </div>
+      <div class="option" data-value="Не знаю, где искать клиентов">
+        <div class="opt-icon">🤔</div>
+        <div class="opt-text">Не знаю, где искать клиентов</div>
         <div class="opt-check"></div>
       </div>
       <div class="option" data-value="Хочу масштабироваться, но не знаю как">
@@ -261,9 +304,101 @@
 
   <!-- ВОПРОС 3 -->
   <div class="card" id="step-3">
-    <div class="step-eyebrow">Вопрос 3 из 3</div>
-    <h2>Какой у вас примерный рекламный бюджет в месяц?</h2>
+    <div class="step-eyebrow">Вопрос 3 из 6</div>
+    <h2>Сколько заказов у вас в месяц сейчас?</h2>
     <div class="options" data-step="3">
+      <div class="option" data-value="До 10 заказов">
+        <div class="opt-icon">🌱</div>
+        <div class="opt-text">До 10 заказов</div>
+        <div class="opt-check"></div>
+      </div>
+      <div class="option" data-value="10–30 заказов">
+        <div class="opt-icon">📦</div>
+        <div class="opt-text">10–30 заказов</div>
+        <div class="opt-check"></div>
+      </div>
+      <div class="option" data-value="30–60 заказов">
+        <div class="opt-icon">📈</div>
+        <div class="opt-text">30–60 заказов</div>
+        <div class="opt-check"></div>
+      </div>
+      <div class="option" data-value="Больше 60 заказов">
+        <div class="opt-icon">⚡</div>
+        <div class="opt-text">Больше 60 заказов</div>
+        <div class="opt-check"></div>
+      </div>
+    </div>
+    <button class="btn-next" id="btn-3" disabled onclick="nextStep(3)">Далее →</button>
+  </div>
+
+  <!-- ВОПРОС 4 -->
+  <div class="card" id="step-4">
+    <div class="step-eyebrow">Вопрос 4 из 6</div>
+    <h2>Какой у вас примерный оборот в месяц (общая выручка, до вычета расходов)?</h2>
+    <div class="options" data-step="4">
+      <div class="option" data-value="До 5 млн ₸">
+        <div class="opt-icon">💵</div>
+        <div class="opt-text">До 5 млн ₸</div>
+        <div class="opt-check"></div>
+      </div>
+      <div class="option" data-value="5–10 млн ₸">
+        <div class="opt-icon">💵</div>
+        <div class="opt-text">5–10 млн ₸</div>
+        <div class="opt-check"></div>
+      </div>
+      <div class="option" data-value="10–20 млн ₸">
+        <div class="opt-icon">💵</div>
+        <div class="opt-text">10–20 млн ₸</div>
+        <div class="opt-check"></div>
+      </div>
+      <div class="option" data-value="20–30 млн ₸">
+        <div class="opt-icon">💵</div>
+        <div class="opt-text">20–30 млн ₸</div>
+        <div class="opt-check"></div>
+      </div>
+      <div class="option" data-value="30 млн ₸ и более">
+        <div class="opt-icon">💵</div>
+        <div class="opt-text">30 млн ₸ и более</div>
+        <div class="opt-check"></div>
+      </div>
+    </div>
+    <button class="btn-next" id="btn-4" disabled onclick="nextStep(4)">Далее →</button>
+  </div>
+
+  <!-- ВОПРОС 5 -->
+  <div class="card" id="step-5">
+    <div class="step-eyebrow">Вопрос 5 из 6</div>
+    <h2>Какой у вас средний чек за заказ?</h2>
+    <div class="options" data-step="5">
+      <div class="option" data-value="300–500 тыс ₸">
+        <div class="opt-icon">🏷️</div>
+        <div class="opt-text">300–500 тыс ₸</div>
+        <div class="opt-check"></div>
+      </div>
+      <div class="option" data-value="500 тыс – 1 млн ₸">
+        <div class="opt-icon">🏷️</div>
+        <div class="opt-text">500 тыс – 1 млн ₸</div>
+        <div class="opt-check"></div>
+      </div>
+      <div class="option" data-value="1–2 млн ₸">
+        <div class="opt-icon">🏷️</div>
+        <div class="opt-text">1–2 млн ₸</div>
+        <div class="opt-check"></div>
+      </div>
+      <div class="option" data-value="2 млн ₸ и выше">
+        <div class="opt-icon">🏷️</div>
+        <div class="opt-text">2 млн ₸ и выше</div>
+        <div class="opt-check"></div>
+      </div>
+    </div>
+    <button class="btn-next" id="btn-5" disabled onclick="nextStep(5)">Далее →</button>
+  </div>
+
+  <!-- ВОПРОС 6 -->
+  <div class="card" id="step-6">
+    <div class="step-eyebrow">Вопрос 6 из 6</div>
+    <h2>Какой у вас примерный рекламный бюджет в месяц?</h2>
+    <div class="options" data-step="6">
       <div class="option" data-value="До $200 в месяц">
         <div class="opt-icon">🌱</div>
         <div class="opt-text">До $200 в месяц</div>
@@ -285,7 +420,7 @@
         <div class="opt-check"></div>
       </div>
     </div>
-    <button class="btn-next" id="btn-3" disabled onclick="nextStep(3)">Получить диагноз →</button>
+    <button class="btn-next" id="btn-6" disabled onclick="nextStep(6)">Получить диагноз →</button>
   </div>
 
   <!-- ФОРМА -->
@@ -296,16 +431,18 @@
       <div>
         <label>Твоё имя</label>
         <input type="text" id="inp-name" placeholder="Как тебя зовут?" autocomplete="given-name">
+        <div class="field-error" id="err-name">Пожалуйста, введи имя</div>
       </div>
       <div>
         <label>WhatsApp</label>
-        <input type="tel" id="inp-phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+        <input type="tel" id="inp-phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" value="+7 ">
+        <div class="field-error" id="err-phone">Введи корректный номер телефона (только цифры)</div>
       </div>
     </div>
     <button class="btn-next" id="btn-form" onclick="submitForm()">
       Получить разбор бесплатно →
     </button>
-    <div class="form-privacy">🔒 Никакого спама — Бексултан свяжется с тобой лично в WhatsApp</div>
+    <div class="form-privacy">🔒 Никакого спама — свяжемся с тобой лично в WhatsApp</div>
   </div>
 
   <!-- ЗАГРУЗКА -->
@@ -319,18 +456,21 @@
   <!-- РЕЗУЛЬТАТ -->
   <div class="card" id="step-result">
     <div class="result-header">
-      <span class="result-emoji">🎯</span>
+      <div class="result-done-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
       <h2>Диагноз готов!</h2>
-      <p>Персональный разбор на основе твоих ответов — Бексултан свяжется с тобой в WhatsApp</p>
+      <p>Ваш диагноз готов! Если не хотите ждать, пока мы свяжемся — напишите нам в WhatsApp</p>
     </div>
     <div class="result-diagnosis">
       <span class="diag-label">Что происходит с твоей рекламой</span>
       <div class="diag-text" id="diag-text">—</div>
     </div>
-    <button class="btn-next" onclick="goToLanding()">
-      Записаться на консультацию за 4 990 ₸ →
+    <button class="btn-whatsapp" onclick="goToWhatsApp()">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Связаться с нами по WhatsApp
     </button>
-    <div class="form-privacy" style="margin-top:14px;">Узнай подробнее о консультации на следующей странице</div>
+    <div class="form-privacy" style="margin-top:14px;">Бексултан свяжется с тобой лично в WhatsApp</div>
   </div>
 
 </div>
@@ -349,10 +489,10 @@
   // ВСТАВЬ СВОИ URL ЗДЕСЬ
   // ============================================================
   const SHEET_URL = 'ВСТАВЬ_URL_GOOGLE_APPS_SCRIPT';
-  const LANDING_URL = 'ВСТАВЬ_URL_ЛЕНДИНГА';
+  const WHATSAPP_NUMBER = '77000000000'; // ВСТАВЬ СВОЙ НОМЕР WhatsApp (без +)
   // ============================================================
 
-  const answers = { q1: '', q2: '', q3: '' };
+  const answers = { q1: '', q2: '', q3: '', q4: '', q5: '', q6: '' };
 
   document.querySelectorAll('.options').forEach(group => {
     group.querySelectorAll('.option').forEach(opt => {
@@ -375,8 +515,8 @@
 
   function nextStep(from) {
     const fromEl = document.getElementById('step-' + from);
-    let toId = from < 3 ? 'step-' + (from + 1) : 'step-form';
-    if (from < 3) updateProgress(from + 1, 3);
+    let toId = from < 6 ? 'step-' + (from + 1) : 'step-form';
+    if (from < 6) updateProgress(from + 1, 6);
     fromEl.classList.add('exit');
     setTimeout(() => {
       fromEl.classList.remove('active', 'exit');
@@ -385,9 +525,40 @@
   }
 
   async function submitForm() {
-    const name = document.getElementById('inp-name').value.trim();
-    const phone = document.getElementById('inp-phone').value.trim();
-    if (!name || !phone) { alert('Пожалуйста, заполни имя и WhatsApp'); return; }
+    const nameInput = document.getElementById('inp-name');
+    const phoneInput = document.getElementById('inp-phone');
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
+
+    const errName = document.getElementById('err-name');
+    const errPhone = document.getElementById('err-phone');
+
+    let isValid = true;
+
+    // сброс ошибок
+    nameInput.classList.remove('error');
+    phoneInput.classList.remove('error');
+    errName.classList.remove('show');
+    errPhone.classList.remove('show');
+
+    // проверка имени — не пустое и без цифр
+    if (!name || /\d/.test(name)) {
+      nameInput.classList.add('error');
+      errName.classList.add('show');
+      errName.textContent = !name ? 'Пожалуйста, введи имя' : 'Имя не должно содержать цифры';
+      isValid = false;
+    }
+
+    // проверка телефона — только цифры, +, пробелы, скобки, дефисы; и минимум 10 цифр
+    const phoneDigits = phone.replace(/\D/g, '');
+    const phoneValidChars = /^[\d\s()+-]+$/.test(phone);
+    if (!phone || phone === '+7' || !phoneValidChars || phoneDigits.length < 10) {
+      phoneInput.classList.add('error');
+      errPhone.classList.add('show');
+      isValid = false;
+    }
+
+    if (!isValid) return; // не пускаем дальше
 
     document.getElementById('step-form').classList.add('exit');
     setTimeout(() => {
@@ -406,7 +577,10 @@
           phone: phone,
           q1: answers.q1,
           q2: answers.q2,
-          q3: answers.q3
+          q3: answers.q3,
+          q4: answers.q4,
+          q5: answers.q5,
+          q6: answers.q6
         })
       });
     } catch(e) { console.log('fetch error', e); }
@@ -415,33 +589,56 @@
   }
 
   function buildDiagnosis() {
-    const q1 = answers.q1, q2 = answers.q2, q3 = answers.q3;
+    const q1 = answers.q1, q2 = answers.q2, q3 = answers.q3, q4 = answers.q4, q5 = answers.q5, q6 = answers.q6;
     let t = '';
-    if (q1.includes('результата')) {
-      t += 'Судя по ответам, <b>реклама запускалась без чёткой стратегии под мебельную нишу</b> — скорее всего, не та аудитория или слабые креативы. ';
-    } else if (q1.includes('первый')) {
+
+    // === БЛОК А: Опыт с рекламой (Q1) ===
+    if (q1.includes('результата почти не было')) {
+      t += 'Судя по ответам, <b>реклама запускалась без чёткой стратегии и понимания целевой аудитории</b> — из-за этого объявления показывались неплатёжеспособной или незаинтересованной аудитории. В связке с этим слабые креативы не отсеивали нецелевых людей, а только усугубляли ситуацию — отсюда и слабый результат. ';
+    } else if (q1.includes('первый раз')) {
       t += 'Ты на правильном пути — <b>стартовать с грамотной стратегией сразу</b> намного дешевле, чем учиться на ошибках. ';
     } else {
       t += '<b>У тебя уже есть база</b> — реклама работает, но есть точки роста, которые позволят кратно увеличить поток клиентов. ';
     }
-    if (q2.includes('Мало заявок')) {
+
+    // === БЛОК Б: Главная проблема (Q2) ===
+    if (q2.includes('Заявок мало')) {
       t += 'Главная проблема — <b>связка аудитория + креатив</b>: объявление не цепляет нужных людей или показывается не тем. ';
-    } else if (q2.includes('не покупают')) {
-      t += '<b>Трафик идёт, но воронка протекает</b> — нужно доработать обработку заявок или усилить оффер в рекламе. ';
-    } else if (q2.includes('сколько вкладывать')) {
-      t += '<b>Без чёткого расчёта бюджета</b> невозможно понять, работает реклама или нет — именно это разберём на консультации. ';
+    } else if (q2.includes('неплатёжеспособные')) {
+      t += '<b>Трафик идёт, заявки падают, но клиенты не целевые</b>. Проблема в креативах — реклама показывается неплатёжеспособной аудитории или более дешёвому сегменту, для которого ваши услуги дороги. Нужно повысить качество креативов и найти новую, более платёжеспособную ЦА. ';
+    } else if (q2.includes('Таргетолог есть')) {
+      t += '<b>Таргетолог на месте, но результат не растёт</b> — скорее всего, проблема в стратегии, креативах или настройках аудиторий. Нужен внешний взгляд и аудит текущих кампаний. ';
+    } else if (q2.includes('нестабильные')) {
+      t += 'Нестабильность "то густо, то пусто" почти всегда решается одним — <b>системным вложением в таргет</b>. Именно реклама сейчас должна быть в приоритете, а не контент или ведение инстаграма — эти вещи работают на узнаваемость, но не дают предсказуемый поток заявок, который нужен вам прямо сейчас. ';
+    } else if (q2.includes('Не знаю, где искать')) {
+      t += '<b>Без понимания каналов привлечения</b> бизнес зависит от сарафанного радио и случайности. Таргетированная реклама — это прямой и контролируемый канал, который даёт предсказуемый поток клиентов при правильной настройке. ';
     } else {
       t += 'Для масштаба нужна <b>системная стратегия</b>, а не просто увеличение бюджета — иначе расходы вырастут, а заявки нет. ';
     }
-    if (q3.includes('До $200')) {
+
+    // === БЛОК В: Масштаб бизнеса (Q3+Q4+Q5) ===
+    const orders = q3, revenue = q4, avgCheck = q5;
+    if (orders.includes('До 10') || revenue.includes('До 5 млн')) {
+      t += 'Сейчас бизнес на стадии <b>активного роста</b> — главное не размывать бюджет, а сфокусироваться на одном-двух рабочих каналах. ';
+    } else if (orders.includes('10–30') || revenue.includes('5–10')) {
+      t += 'У вас <b>стабильная база</b>, но для выхода на новый уровень нужно усилить рекламную воронку и масштабировать то, что уже работает. ';
+    } else if (orders.includes('30–60') || revenue.includes('10–20')) {
+      t += 'Бизнес <b>уже масштабный</b> — сейчас важно оптимизировать рекламу, чтобы снизить стоимость заявки и увеличить маржинальность. ';
+    } else {
+      t += 'У вас <b>крупный бизнес с высоким оборотом</b> — здесь реклама должна работать как точный инструмент с чёткой аналитикой и масштабированием. ';
+    }
+
+    // === БЛОК Г: Бюджет на таргет (Q6) ===
+    if (q6.includes('До $200')) {
       t += 'При бюджете до $200 важно <b>бить точечно</b> — чёткая сегментация ЦА решает всё.';
-    } else if (q3.includes('$200')) {
+    } else if (q6.includes('$200')) {
       t += 'С бюджетом $200–500 уже можно выстроить <b>стабильный поток заявок</b> при правильной стратегии.';
-    } else if (q3.includes('$500')) {
+    } else if (q6.includes('$500')) {
       t += 'С бюджетом $500+ у тебя отличные возможности для <b>масштабирования</b> — при грамотном подходе результат будет кратным.';
     } else {
       t += 'На консультации <b>рассчитаем бюджет</b> конкретно под твой бизнес и желаемый поток клиентов.';
     }
+
     return t;
   }
 
@@ -456,9 +653,12 @@
     }, 350);
   }
 
-  function goToLanding() { window.location.href = LANDING_URL; }
+  function goToWhatsApp() {
+    const message = encodeURIComponent('Здравствуйте! Прошёл квиз на сайте, хочу получить разбор рекламы.');
+    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + message, '_blank');
+  }
 
-  updateProgress(1, 3);
+  updateProgress(1, 6);
 </script>
 </body>
 </html>
