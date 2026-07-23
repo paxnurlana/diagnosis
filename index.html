@@ -110,8 +110,13 @@
     border-right: 2px solid #fff; border-bottom: 2px solid #fff;
     transform: rotate(45deg) translateY(-1px);
   }
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 26px;
+  }
   .btn-next {
-    margin-top: 26px; width: 100%; padding: 16px;
+    flex: 1; padding: 16px;
     border-radius: 999px; border: none;
     background: #FF5A1F; color: #fff;
     font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px;
@@ -122,6 +127,17 @@
   }
   .btn-next:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
   .btn-next:not(:disabled):hover { transform: translateY(-1px); }
+  .btn-back {
+    padding: 16px 24px;
+    border-radius: 999px; border: 1.5px solid #E8E8E8;
+    background: #fff; color: #6B6D76;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    white-space: nowrap;
+  }
+  .btn-back:hover { border-color: #FF5A1F; color: #FF5A1F; background: #FFF7F4; }
   .form-group { display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px; }
   .form-group label {
     font-size: 13px; font-weight: 600; color: #6B6D76;
@@ -148,10 +164,6 @@
   }
   .field-error.show { display: block; }
   .form-group input::placeholder { color: #BCBCBC; }
-  .form-privacy {
-    font-size: 12.5px; color: #B0B0B0;
-    text-align: center; line-height: 1.5; margin-top: 10px;
-  }
   .result-header { text-align: center; margin-bottom: 28px; }
   .result-done-icon {
     width: 72px; height: 72px;
@@ -224,6 +236,9 @@
     .card { padding: 30px 22px 28px; }
     .card h2 { font-size: 19px; }
     .option { padding: 14px 16px; gap: 10px; }
+    .btn-row { flex-direction: column; }
+    .btn-back { width: 100%; order: 2; }
+    .btn-next { width: 100%; order: 1; }
     .btn-whatsapp { font-size: 16px; padding: 20px 14px; }
   }
 </style>
@@ -260,7 +275,10 @@
         <div class="opt-check"></div>
       </div>
     </div>
-    <button class="btn-next" id="btn-1" disabled onclick="nextStep(1)">Далее →</button>
+    <div class="btn-row">
+      <button class="btn-back" onclick="prevStep(1)">← Назад</button>
+      <button class="btn-next" id="btn-1" disabled onclick="nextStep(1)">Далее →</button>
+    </div>
   </div>
 
   <!-- ВОПРОС 2 -->
@@ -274,7 +292,7 @@
         <div class="opt-check"></div>
       </div>
       <div class="option" data-value="Заявки есть, но приходят неплатёжеспособные, проблемные клиенты">
-        <div class="opt-icon" style="background:#FFEBEE; color:#E53935;">😠</div>
+        <div class="opt-icon">😠</div>
         <div class="opt-text">Заявки есть, но приходят неплатёжеспособные, проблемные клиенты</div>
         <div class="opt-check"></div>
       </div>
@@ -299,7 +317,10 @@
         <div class="opt-check"></div>
       </div>
     </div>
-    <button class="btn-next" id="btn-2" disabled onclick="nextStep(2)">Далее →</button>
+    <div class="btn-row">
+      <button class="btn-back" onclick="prevStep(2)">← Назад</button>
+      <button class="btn-next" id="btn-2" disabled onclick="nextStep(2)">Далее →</button>
+    </div>
   </div>
 
   <!-- ВОПРОС 3 -->
@@ -328,7 +349,10 @@
         <div class="opt-check"></div>
       </div>
     </div>
-    <button class="btn-next" id="btn-3" disabled onclick="nextStep(3)">Далее →</button>
+    <div class="btn-row">
+      <button class="btn-back" onclick="prevStep(3)">← Назад</button>
+      <button class="btn-next" id="btn-3" disabled onclick="nextStep(3)">Далее →</button>
+    </div>
   </div>
 
   <!-- ВОПРОС 4 -->
@@ -342,27 +366,30 @@
         <div class="opt-check"></div>
       </div>
       <div class="option" data-value="5–10 млн ₸">
-        <div class="opt-icon">💵</div>
+        <div class="opt-icon">💰</div>
         <div class="opt-text">5–10 млн ₸</div>
         <div class="opt-check"></div>
       </div>
       <div class="option" data-value="10–20 млн ₸">
-        <div class="opt-icon">💵</div>
+        <div class="opt-icon">💎</div>
         <div class="opt-text">10–20 млн ₸</div>
         <div class="opt-check"></div>
       </div>
       <div class="option" data-value="20–30 млн ₸">
-        <div class="opt-icon">💵</div>
+        <div class="opt-icon">🏦</div>
         <div class="opt-text">20–30 млн ₸</div>
         <div class="opt-check"></div>
       </div>
       <div class="option" data-value="30 млн ₸ и более">
-        <div class="opt-icon">💵</div>
+        <div class="opt-icon">🏆</div>
         <div class="opt-text">30 млн ₸ и более</div>
         <div class="opt-check"></div>
       </div>
     </div>
-    <button class="btn-next" id="btn-4" disabled onclick="nextStep(4)">Далее →</button>
+    <div class="btn-row">
+      <button class="btn-back" onclick="prevStep(4)">← Назад</button>
+      <button class="btn-next" id="btn-4" disabled onclick="nextStep(4)">Далее →</button>
+    </div>
   </div>
 
   <!-- ВОПРОС 5 -->
@@ -376,22 +403,25 @@
         <div class="opt-check"></div>
       </div>
       <div class="option" data-value="500 тыс – 1 млн ₸">
-        <div class="opt-icon">🏷️</div>
+        <div class="opt-icon">💳</div>
         <div class="opt-text">500 тыс – 1 млн ₸</div>
         <div class="opt-check"></div>
       </div>
       <div class="option" data-value="1–2 млн ₸">
-        <div class="opt-icon">🏷️</div>
+        <div class="opt-icon">💎</div>
         <div class="opt-text">1–2 млн ₸</div>
         <div class="opt-check"></div>
       </div>
       <div class="option" data-value="2 млн ₸ и выше">
-        <div class="opt-icon">🏷️</div>
+        <div class="opt-icon">👑</div>
         <div class="opt-text">2 млн ₸ и выше</div>
         <div class="opt-check"></div>
       </div>
     </div>
-    <button class="btn-next" id="btn-5" disabled onclick="nextStep(5)">Далее →</button>
+    <div class="btn-row">
+      <button class="btn-back" onclick="prevStep(5)">← Назад</button>
+      <button class="btn-next" id="btn-5" disabled onclick="nextStep(5)">Далее →</button>
+    </div>
   </div>
 
   <!-- ВОПРОС 6 -->
@@ -420,13 +450,16 @@
         <div class="opt-check"></div>
       </div>
     </div>
-    <button class="btn-next" id="btn-6" disabled onclick="nextStep(6)">Получить диагноз →</button>
+    <div class="btn-row">
+      <button class="btn-back" onclick="prevStep(6)">← Назад</button>
+      <button class="btn-next" id="btn-6" disabled onclick="nextStep(6)">Получить диагноз →</button>
+    </div>
   </div>
 
   <!-- ФОРМА -->
   <div class="card" id="step-form">
     <div class="step-eyebrow">Почти готово!</div>
-    <h2>Куда отправить персональный разбор твоей рекламы?</h2>
+    <h2>Оставьте свои контакты, чтобы мы с вами связались</h2>
     <div class="form-group">
       <div>
         <label>Твоё имя</label>
@@ -439,10 +472,12 @@
         <div class="field-error" id="err-phone">Введи корректный номер телефона (только цифры)</div>
       </div>
     </div>
-    <button class="btn-next" id="btn-form" onclick="submitForm()">
-      Получить разбор бесплатно →
-    </button>
-    <div class="form-privacy">🔒 Никакого спама — свяжемся с тобой лично в WhatsApp</div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="prevStep('form')">← Назад</button>
+      <button class="btn-next" id="btn-form" onclick="submitForm()">
+        Получить разбор бесплатно →
+      </button>
+    </div>
   </div>
 
   <!-- ЗАГРУЗКА -->
@@ -483,16 +518,12 @@
   </div>
   Уже 30+ мебельных бизнесов прошли разбор
 </div>
-
 <script>
-  // ============================================================
-  // ВСТАВЬ СВОИ URL ЗДЕСЬ
-  // ============================================================
   const SHEET_URL = 'ВСТАВЬ_URL_GOOGLE_APPS_SCRIPT';
-  const WHATSAPP_NUMBER = '77000000000'; // ВСТАВЬ СВОЙ НОМЕР WhatsApp (без +)
-  // ============================================================
+  const WHATSAPP_NUMBER = '77066387416';
 
   const answers = { q1: '', q2: '', q3: '', q4: '', q5: '', q6: '' };
+  let currentStep = 1;
 
   document.querySelectorAll('.options').forEach(group => {
     group.querySelectorAll('.option').forEach(opt => {
@@ -516,7 +547,33 @@
   function nextStep(from) {
     const fromEl = document.getElementById('step-' + from);
     let toId = from < 6 ? 'step-' + (from + 1) : 'step-form';
-    if (from < 6) updateProgress(from + 1, 6);
+    if (from < 6) {
+      currentStep = from + 1;
+      updateProgress(currentStep, 6);
+    } else {
+      currentStep = 'form';
+    }
+    fromEl.classList.add('exit');
+    setTimeout(() => {
+      fromEl.classList.remove('active', 'exit');
+      document.getElementById(toId).classList.add('active');
+    }, 350);
+  }
+
+  function prevStep(from) {
+    let toId;
+    if (from === 'form') {
+      toId = 'step-6';
+      currentStep = 6;
+      updateProgress(6, 6);
+    } else if (from === 1) {
+      return;
+    } else {
+      toId = 'step-' + (from - 1);
+      currentStep = from - 1;
+      updateProgress(currentStep, 6);
+    }
+    const fromEl = document.getElementById('step-' + from);
     fromEl.classList.add('exit');
     setTimeout(() => {
       fromEl.classList.remove('active', 'exit');
@@ -535,13 +592,11 @@
 
     let isValid = true;
 
-    // сброс ошибок
     nameInput.classList.remove('error');
     phoneInput.classList.remove('error');
     errName.classList.remove('show');
     errPhone.classList.remove('show');
 
-    // проверка имени — не пустое и без цифр
     if (!name || /\d/.test(name)) {
       nameInput.classList.add('error');
       errName.classList.add('show');
@@ -549,7 +604,6 @@
       isValid = false;
     }
 
-    // проверка телефона — только цифры, +, пробелы, скобки, дефисы; и минимум 10 цифр
     const phoneDigits = phone.replace(/\D/g, '');
     const phoneValidChars = /^[\d\s()+-]+$/.test(phone);
     if (!phone || phone === '+7' || !phoneValidChars || phoneDigits.length < 10) {
@@ -558,7 +612,7 @@
       isValid = false;
     }
 
-    if (!isValid) return; // не пускаем дальше
+    if (!isValid) return;
 
     document.getElementById('step-form').classList.add('exit');
     setTimeout(() => {
@@ -592,7 +646,6 @@
     const q1 = answers.q1, q2 = answers.q2, q3 = answers.q3, q4 = answers.q4, q5 = answers.q5, q6 = answers.q6;
     let t = '';
 
-    // === БЛОК А: Опыт с рекламой (Q1) ===
     if (q1.includes('результата почти не было')) {
       t += 'Судя по ответам, <b>реклама запускалась без чёткой стратегии и понимания целевой аудитории</b> — из-за этого объявления показывались неплатёжеспособной или незаинтересованной аудитории. В связке с этим слабые креативы не отсеивали нецелевых людей, а только усугубляли ситуацию — отсюда и слабый результат. ';
     } else if (q1.includes('первый раз')) {
@@ -601,7 +654,6 @@
       t += '<b>У тебя уже есть база</b> — реклама работает, но есть точки роста, которые позволят кратно увеличить поток клиентов. ';
     }
 
-    // === БЛОК Б: Главная проблема (Q2) ===
     if (q2.includes('Заявок мало')) {
       t += 'Главная проблема — <b>связка аудитория + креатив</b>: объявление не цепляет нужных людей или показывается не тем. ';
     } else if (q2.includes('неплатёжеспособные')) {
@@ -616,7 +668,6 @@
       t += 'Для масштаба нужна <b>системная стратегия</b>, а не просто увеличение бюджета — иначе расходы вырастут, а заявки нет. ';
     }
 
-    // === БЛОК В: Масштаб бизнеса (Q3+Q4+Q5) ===
     const orders = q3, revenue = q4, avgCheck = q5;
     if (orders.includes('До 10') || revenue.includes('До 5 млн')) {
       t += 'Сейчас бизнес на стадии <b>активного роста</b> — главное не размывать бюджет, а сфокусироваться на одном-двух рабочих каналах. ';
@@ -628,7 +679,6 @@
       t += 'У вас <b>крупный бизнес с высоким оборотом</b> — здесь реклама должна работать как точный инструмент с чёткой аналитикой и масштабированием. ';
     }
 
-    // === БЛОК Г: Бюджет на таргет (Q6) ===
     if (q6.includes('До $200')) {
       t += 'При бюджете до $200 важно <b>бить точечно</b> — чёткая сегментация ЦА решает всё.';
     } else if (q6.includes('$200')) {
